@@ -19,7 +19,7 @@ public class RouteMap {
 		this.num = num;
 		this.route = route;
 		this.city = city;
-		this.stopDate =  new Date(new Timestamp(year-1900, month, date, hour, minute, second, 0).getTime());
+		this.stopDate =  new Date(new Timestamp(year - 1900, month - 1, date, hour, minute, second, 0).getTime());
 		//1900 костыль
 	}
 

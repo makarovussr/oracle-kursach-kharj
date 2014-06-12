@@ -7,6 +7,12 @@ import java.sql.Date;
 @Entity
 @Table(name="cities")
 public class City {	
+	public City(String name, String address, String phone) {
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+	}
+
 	@Id
     @Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -15,24 +21,14 @@ public class City {
 	@Column(name="name", nullable = false)
 	public String name;
 	
-	@Column(name="location")
-	public String location;
+	@Column(name="address")
+	public String address;
+	
+	@Column(name="phone")
+	public String phone;
 
 	public City(){
 		
-	}
-	
-	public City(String name, String location){
-		this.name = name;
-		this.location = location;		
-	}
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -43,17 +39,26 @@ public class City {
 		this.name = name;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", location=" + location
-				+ "]";
+		return "City [id=" + id + ", name=" + name + ", address=" + address
+				+ ", phone=" + phone + "]";
 	}
+	
 }
