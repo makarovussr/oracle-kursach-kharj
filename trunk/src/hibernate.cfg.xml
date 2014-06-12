@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@//127.0.0.1:1521/XE</property>
+		<property name="hibernate.connection.username">kharj</property>
+		<property name="hibernate.connection.password">pass</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.show_sql">true</property>
+
+		 <!-- JDBC connection pool (use the built-in) -->  
+        <property name="connection.pool_size">2</property>  
+    
+        <!-- Disable the second-level cache  -->  
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>  
+
+        <!-- No drop database at startup ! -->  
+        <property name="hbm2ddl.auto">validate</property> 
+		
+		<mapping class="org.kharj.kursach_db.City" />
+		<mapping class="org.kharj.kursach_db.Client" />
+		<mapping class="org.kharj.kursach_db.Schedule" />
+		<mapping class="org.kharj.kursach_db.Rate" />
+		<mapping class="org.kharj.kursach_db.ParcelType" />
+		<mapping class="org.kharj.kursach_db.VehicleMaxload" />
+		<mapping class="org.kharj.kursach_db.Vehicle" />
+		<mapping class="org.kharj.kursach_db.Route" />
+		<mapping class="org.kharj.kursach_db.RouteMap" />
+		<mapping class="org.kharj.kursach_db.Parcel" />
+
+	</session-factory>
+
+
+</hibernate-configuration>

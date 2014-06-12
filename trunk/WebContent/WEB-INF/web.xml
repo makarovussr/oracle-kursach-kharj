@@ -7,10 +7,27 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>/faces/*</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>*.jsf</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>*.faces</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>*.xhtml</url-pattern>
+</servlet-mapping>
+ <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>index.jsf</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
   <context-param>
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
     <param-value>resources.application</param-value>

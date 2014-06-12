@@ -10,8 +10,7 @@ public class Client {
 
 
 	public Client(String firstName, String lastName, String middleName,
-			City city, String address, String phone, String email,
-			String password) {
+			City city, String address, String phone, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -20,7 +19,6 @@ public class Client {
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.password = password;
 		java.util.Date d = new java.util.Date();//today
 		this.registrationDate = new Date(d.getTime());
 	}
@@ -54,9 +52,6 @@ public class Client {
 	
 	@Column(name="email")
 	public String email;
-	
-	@Column(name="password")
-	public String password;
 
 	public Client(){
 		
@@ -132,7 +127,7 @@ public class Client {
 				+ lastName + ", middleName=" + middleName + ", city=" + city
 				+ ", registrationDate=" + registrationDate + ", address="
 				+ address + ", phone=" + phone + ", email=" + email
-				+ ", password=" + password + "]";
+				+ "]";
 	}
 
 	public String getEmail() {
@@ -143,12 +138,5 @@ public class Client {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 }

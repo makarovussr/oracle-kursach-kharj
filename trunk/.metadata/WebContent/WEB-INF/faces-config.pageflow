@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14021725563220" configfile="/Kursach_web/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14026093313770" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf14026093313781" inlinks="pf14026093313782" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Client.xhtml" x="122" y="178" id="pf14026093313783" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14026093313782" inlinks="pf14026093313781" path="/Client.xhtml"/>
+  <links id="pf14026093313781" target="pf14026093313783" source="pf14026093313770" outcome="result"/>
+  <links id="pf14026093313782" target="pf14026093313770" source="pf14026093313783" outcome="back"/>
+</pageflow:Pageflow>
