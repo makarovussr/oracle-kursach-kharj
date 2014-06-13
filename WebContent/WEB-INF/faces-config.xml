@@ -6,8 +6,8 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
     version="2.1">
 	<managed-bean>
-		<managed-bean-name>clientBean</managed-bean-name>
-		<managed-bean-class>org.kharj.kursach_db.beans.ClientBean</managed-bean-class>
+		<managed-bean-name>selectClientBean</managed-bean-name>
+		<managed-bean-class>org.kharj.kursach_db.beans.SelectClientBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
     <navigation-rule>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Default title</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:outputText value="Enter name: " />
+		<h:inputText value="#{selectClientBean.name}" size="20" />
+		<h:commandButton value="Search" update="clientsTable" ajax="true" />
+		<h:outputText value="Enter address: " />
+		<h:inputText value="#{selectClientBean.address}" size="20" />
+		<h:commandButton action="result" value="Search" />
+		<h:outputText value="Enter name: " />
+		<h:inputText value="#{selectClientBean.email}" size="20" />
+		<h:commandButton action="result" value="Search" />
+
+		<h:outputText value="Enter name: " />
+		<h:inputText value="#{selectClientBean.phone}" size="20" />
+		<h:commandButton action="result" value="Search" />
+
+		<h:outputText value="Clients: " />
+		<br />
+		<br />
+	</h:form>
+		<h:dataTable value="#{selectClientBean.clients}" var="clients"
+			id="clientsTable">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="First name" />
+				</f:facet>
+				<h:outputText value="#{client.firstName}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Last name" />
+				</f:facet>
+				<h:outputText value="#{client.lastName}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="City" />
+				</f:facet>
+				<h:outputText value="#{client.city.name}" />
+			</h:column>
+		</h:dataTable>
+	<h:form>
+		<h:commandButton action="toindex" value="Back" />
+	</h:form>
+</h:body>
+
+</html>
