@@ -12,7 +12,7 @@
 	<h:form>
 		<h:outputText value="Enter name: " />
 		<h:inputText value="#{selectClientBean.name}" size="20" />
-		<h:commandButton value="Search" update="clientsTable" ajax="true" />
+		<h:commandButton value="Search" update=":clientsTable" ajax="true" />
 		<h:outputText value="Enter address: " />
 		<h:inputText value="#{selectClientBean.address}" size="20" />
 		<h:commandButton action="result" value="Search" />
@@ -28,7 +28,7 @@
 		<br />
 		<br />
 	</h:form>
-		<h:dataTable value="#{selectClientBean.clients}" var="clients"
+		<h:dataTable value="#{selectClientBean.clients}" var="client"
 			id="clientsTable">
 			<h:column>
 				<f:facet name="header">

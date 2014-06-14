@@ -9,21 +9,24 @@ import org.kharj.kursach_db.DBConnector;
 public class SelectClientBean {
 
 		private List<Client> clients = new ArrayList<Client>();
-		private String name;
-		private String email;
-		private String address;
-		private String phone;
+		private String name = "";
+		private String email = "";
+		private String address = "";
+		private String phone = "";
 		public List<Client> getClients() {
-			System.out.print("getclient");
 			DBConnector connector = new DBConnector();
-			if(name.length()>0)
+			System.out.print("name"+name);
+			//if(name != null && name.length()>0)
 			clients = connector.GetClientsByName(name);
-			else if(email.length()>0)
+			/*else if(name != null && email.length()>0)
 				clients = connector.GetClientsByEmail(email);
-			else if(address.length()>0)
+			else if(name != null && address.length()>0)
 				clients = connector.GetClientsByAddress(address);
-			else if(phone.length()>0)
-				clients = connector.GetClientsByPhone(phone);
+			else if(name != null && phone.length()>0)
+				clients = connector.GetClientsByPhone(phone);*/
+			
+			//clients = connector.GetClientsByName("Evg");
+			System.out.print("getclient"+clients);
 			return clients;
 		}
 		public void setClients(List<Client> clients) {
