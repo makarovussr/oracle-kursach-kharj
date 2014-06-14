@@ -10,24 +10,22 @@
 
 <h:body>
 	<h:form>
-		<h:outputText value="Enter name: " />
-		<h:inputText value="#{selectClientBean.name}" size="20" />
-		<h:commandButton value="Search" update=":clientsTable" ajax="true" />
-		<h:outputText value="Enter address: " />
-		<h:inputText value="#{selectClientBean.address}" size="20" />
-		<h:commandButton action="result" value="Search" />
-		<h:outputText value="Enter name: " />
-		<h:inputText value="#{selectClientBean.email}" size="20" />
-		<h:commandButton action="result" value="Search" />
-
-		<h:outputText value="Enter name: " />
-		<h:inputText value="#{selectClientBean.phone}" size="20" />
-		<h:commandButton action="result" value="Search" />
-
-		<h:outputText value="Clients: " />
+		<h:outputText value="Name: " />
+		<h:inputText value="#{selectClientBean.name}" size="20" id="clientName" />
 		<br />
+		<h:outputText value="Address: " />
+		<h:inputText value="#{selectClientBean.address}" size="20" id="clientAddress" />
 		<br />
-	</h:form>
+		<h:outputText value="Email: " />
+		<h:inputText value="#{selectClientBean.email}" size="20" id="clientEmail" />
+		<br />
+		<h:outputText value="Phone: " />
+		<h:inputText value="#{selectClientBean.phone}" size="20" id="clientPhone" />
+
+		<br />
+		<h:commandButton value="Search">
+         <f:ajax execute="clientName clientAddress clientEmail clientPhone" render="clientsTable" />
+      </h:commandButton>
 		<h:dataTable value="#{selectClientBean.clients}" var="client"
 			id="clientsTable">
 			<h:column>
@@ -49,8 +47,9 @@
 				<h:outputText value="#{client.city.name}" />
 			</h:column>
 		</h:dataTable>
+	</h:form>
 	<h:form>
-		<h:commandButton action="toindex" value="Back" />
+		<h:commandButton action="toindex" value="To Index" />
 	</h:form>
 </h:body>
 
