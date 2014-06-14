@@ -3,9 +3,12 @@ package org.kharj.kursach_db.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.*;
+
 import org.kharj.kursach_db.Client;
 import org.kharj.kursach_db.DBConnector;
-
+@ManagedBean(name = "selectClientBean", eager = true)
+@SessionScoped
 public class SelectClientBean {
 
 		private List<Client> clients = new ArrayList<Client>();
@@ -15,23 +18,19 @@ public class SelectClientBean {
 		private String phone = "";
 		public List<Client> getClients() {
 			DBConnector connector = new DBConnector();
-			System.out.print("name"+name);
-			//if(name != null && name.length()>0)
-			clients = connector.GetClientsByName(name);
-			/*else if(name != null && email.length()>0)
+			if(name != null && name.length()>0)
+				clients = connector.GetClientsByName(name);
+			else if(name != null && email.length()>0)
 				clients = connector.GetClientsByEmail(email);
 			else if(name != null && address.length()>0)
 				clients = connector.GetClientsByAddress(address);
 			else if(name != null && phone.length()>0)
-				clients = connector.GetClientsByPhone(phone);*/
+				clients = connector.GetClientsByPhone(phone);
 			
-			//clients = connector.GetClientsByName("Evg");
-			System.out.print("getclient"+clients);
+			connector.Close();
 			return clients;
 		}
-		public void setClients(List<Client> clients) {
-			//readonly
-		}
+		
 		public String getName() {
 			return name;
 		}
