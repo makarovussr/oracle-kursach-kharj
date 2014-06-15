@@ -5,52 +5,70 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Default title</title>
+	<title>Select client</title>
 </h:head>
 
 <h:body>
 	<h:form>
 		<h:outputText value="Name: " />
-		<h:inputText value="#{selectClientBean.name}" size="20" id="clientName" />
+		<h:inputText value="#{selectClientBean.name}" size="20"
+			id="clientName" />
 		<br />
 		<h:outputText value="Address: " />
-		<h:inputText value="#{selectClientBean.address}" size="20" id="clientAddress" />
+		<h:inputText value="#{selectClientBean.address}" size="20"
+			id="clientAddress" />
 		<br />
 		<h:outputText value="Email: " />
-		<h:inputText value="#{selectClientBean.email}" size="20" id="clientEmail" />
+		<h:inputText value="#{selectClientBean.email}" size="20"
+			id="clientEmail" />
 		<br />
 		<h:outputText value="Phone: " />
-		<h:inputText value="#{selectClientBean.phone}" size="20" id="clientPhone" />
+		<h:inputText value="#{selectClientBean.phone}" size="20"
+			id="clientPhone" />
 
 		<br />
 		<h:commandButton value="Search">
-         <f:ajax execute="clientName clientAddress clientEmail clientPhone" render="clientsTable" />
-      </h:commandButton>
+			<f:ajax execute="clientName clientAddress clientEmail clientPhone"
+				render="clientsTable" />
+		</h:commandButton>
 		<h:dataTable value="#{selectClientBean.clients}" var="client"
-			id="clientsTable">
+			id="clientsTable" border="1">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="First name" />
+					<h:outputText value="Full name" />
 				</f:facet>
-				<h:outputText value="#{client.firstName}" />
+				<h:outputText
+					value="#{client.lastName} #{client.firstName} #{client.middleName}" />
 			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Last name" />
-				</f:facet>
-				<h:outputText value="#{client.lastName}" />
-			</h:column>
+
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="City" />
 				</f:facet>
 				<h:outputText value="#{client.city.name}" />
 			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Address" />
+				</f:facet>
+				<h:outputText value="#{client.address}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:commandButton value="Use" action="#{selectClientBean.Select}" >
+					<f:param name="selectedIdStr" value="#{client.id}" />
+				</h:commandButton>
+			</h:column>
+
+
+
 		</h:dataTable>
 	</h:form>
-	<h:form>
-		<h:commandButton action="toindex" value="To Index" />
-	</h:form>
+	<a href="index.xhtml">Index</a>
 </h:body>
 
 </html>

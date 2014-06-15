@@ -180,7 +180,19 @@ public class DBConnector {
 		return crit.add(or).list();
 		
 	}
-	
+	public void UpdateClient(Client c){
+		Transaction tr = session.beginTransaction();
+		Client cl = (Client)session.load(Client.class, c.id);
+		cl.firstName = c.firstName;
+		cl.middleName = c.middleName;
+		cl.lastName = c.lastName;
+		cl.address = c.address;
+		cl.phone = c.phone;
+		cl.email = c.email;
+		cl.city = c.city;
+		tr.commit();
+		
+	}
 	//City
 	public City GetCityById(int id) {
 		City city = (City) session.get(City.class, id);

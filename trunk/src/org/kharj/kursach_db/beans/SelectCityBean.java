@@ -8,27 +8,24 @@ import java.util.Map;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
-import org.kharj.kursach_db.Client;
-import org.kharj.kursach_db.DBConnector;
-@ManagedBean(name = "selectClientBean", eager = true)
+import org.kharj.kursach_db.*;
+@ManagedBean(name = "selectCityBean", eager = true)
 @SessionScoped
-public class SelectClientBean {
+public class SelectCityBean {
 
-		private List<Client> clients = new ArrayList<Client>();
+		private List<City> cities = new ArrayList<City>();
 		private String name = "";
-		private String email = "";
 		private String address = "";
 		private String phone = "";
-		private String navigateTo = "Client.xhtml";
+		private String navigateTo = "City.xhtml";
 		private Integer selectedId = null;
 		
 		public String Select(){
 			//clean
 			name = "";
-			email = "";
 			address = "";
 			phone = "";
-			clients = new ArrayList<Client>();
+			cities = new ArrayList<City>();
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		  String strId = params.get("selectedIdStr");
 
@@ -40,9 +37,9 @@ public class SelectClientBean {
 			
 				String req = "";
 				if(navigateTo.contains("?")){
-					req = "&selectedClientId="+selectedId;
+					req = "&selectedCityId="+selectedId;
 				}else{
-					req = "?selectedClientId="+selectedId;
+					req = "?selectedCityId="+selectedId;
 				}
 			try{
 				
@@ -55,20 +52,12 @@ public class SelectClientBean {
 			return strId;
 		}
 		
-		
-		
-		public List<Client> getClients() {
+		public List<City> getCities() {
 			DBConnector connector = new DBConnector();
 			if(name != null && name.length()>0)
-				clients = connector.GetClientsByName(name);
-			else if(name != null && email.length()>0)
-				clients = connector.GetClientsByEmail(email);
-			else if(name != null && address.length()>0)
-				clients = connector.GetClientsByAddress(address);
-			else if(name != null && phone.length()>0)
-				clients = connector.GetClientsByPhone(phone);
+				cities = connector.GetCitiesByName("K");
 			connector.Close();
-			return clients;
+			return cities;
 		}
 		
 		public String getName() {
@@ -76,12 +65,6 @@ public class SelectClientBean {
 		}
 		public void setName(String name) {
 			this.name = name;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
 		}
 		public String getAddress() {
 			return address;
@@ -95,11 +78,9 @@ public class SelectClientBean {
 		public void setPhone(String phone) {
 			this.phone = phone;
 		}
-
 		public String getNavigateTo() {
 			return navigateTo;
 		}
-
 		public void setNavigateTo(String navigateTo) {
 			this.navigateTo = navigateTo;
 		}
