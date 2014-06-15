@@ -5,11 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
     version="2.1">
-	<managed-bean>
-		<managed-bean-name>selectClientBean</managed-bean-name>
-		<managed-bean-class>org.kharj.kursach_db.beans.SelectClientBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
+	
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
@@ -18,7 +14,7 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/Client.xhtml</from-view-id>
+        <from-view-id>/SelectClient.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>toindex</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>

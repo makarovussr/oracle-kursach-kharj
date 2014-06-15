@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Client page</title>
+</h:head>
+
+<h:body>
+	<h:form id="clientForm">
+		<h:outputText value="Last name:" />
+		<h:inputText value="#{clientBean.lastName}" size="20"
+			id="clientLastName" />
+		<br />
+		<h:outputText value="First name:" />
+		<h:inputText value="#{clientBean.firstName}" size="20"
+			id="clientFirstName" />
+		<br />
+		<h:outputText value="Middle name:" />
+		<h:inputText value="#{clientBean.middleName}" size="20"
+			id="clientMiddleName" />
+		<br />
+		<h:outputText value="Address: " />
+		<h:inputText value="#{clientBean.address}" size="20"
+			id="clientAddress" />
+		<br />
+		<h:outputText value="Email: " />
+		<h:inputText value="#{clientBean.email}" size="20"
+			id="clientEmail" />
+		<br />
+		<h:outputText value="Phone: " />
+		<h:inputText value="#{clientBean.phone}" size="20"
+			id="clientPhone" />
+		<br />
+		<h:outputText value="City: #{clientBean.city.name} " />
+		<h:commandLink value="Change city"/><!-- TODO -->
+		<br />
+		
+		<h:commandButton value="Save">
+			<f:ajax execute="clientFirstName clientLastName clientMiddleName clientAddress clientEmail clientPhone #{clientBean.Update()}"
+				render="clientForm" />
+		</h:commandButton>
+		
+	</h:form>
+	<a href="index.xhtml">Index</a>
+</h:body>
+
+</html>

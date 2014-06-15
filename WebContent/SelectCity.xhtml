@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Select city</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:outputText value="Name: " />
+		<h:inputText value="#{selectCityBean.name}" size="20"
+			id="cityName" />
+		<br />
+		<!--h:outputText value="Address: " />
+		<h:inputText value="#{selectCityBean.address}" size="20"
+			id="cityAddress" />
+		<br />
+		<h:outputText value="Phone: " />
+		<h:inputText value="#{selectCityBean.phone}" size="20"
+			id="cityPhone" />
+
+		<br /-->
+		<h:commandButton value="Search">
+			<f:ajax execute="cityName"
+				render="citiesTable" />
+		</h:commandButton>
+		<h:dataTable value="#{selectCityBean.cities}" var="city"
+			id="citiesTable" border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText
+					value="#{city.name}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Address" />
+				</f:facet>
+				<h:outputText value="#{city.address}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Phone" />
+				</f:facet>
+				<h:outputText value="#{city.phone}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:commandButton value="Use" action="#{selectCityBean.Select}" >
+					<f:param name="selectedIdStr" value="#{city.id}" />
+				</h:commandButton>
+			</h:column>
+
+
+
+		</h:dataTable>
+	</h:form>
+	<a href="index.xhtml">Index</a>
+</h:body>
+
+</html>
