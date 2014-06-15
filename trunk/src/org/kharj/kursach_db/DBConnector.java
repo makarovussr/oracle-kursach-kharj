@@ -207,6 +207,17 @@ public class DBConnector {
 		List l =  session.createCriteria(City.class).list();
 		return l;			
 	}
+	public void UpdateCity(City c){
+		Transaction tr = session.beginTransaction();
+		City cl = (City)session.load(City.class, c.id);
+		cl.name = c.name;
+		cl.address = c.address;
+		cl.phone = c.phone;
+		tr.commit();
+		
+	}
+	
+	
 	//Schedule
 	public List<Schedule> GetSchedulesByCity(City city){
 		return session.createCriteria(Schedule.class).add(Restrictions.eq("city", city)).list();
@@ -214,6 +225,30 @@ public class DBConnector {
 	public List<City> GetCitiesOpenedNow(){
 		//TODO: 
 		return null;
+	}
+	public void RemoveSchedule(Schedule s){
+		Transaction tr = session.beginTransaction();
+		Schedule dbS = (Schedule)session.load(Schedule.class, s.id);
+		if(dbS!=null){
+			session.delete(dbS);
+		}
+		tr.commit();
+	}
+	public void UpdateSchedulesForomList(List<Schedule> update){
+		for(Schedule up : update){
+			if(up.dayOfWeek>6) continue; //wrong
+			List<Schedule> l = session.createCriteria(Schedule.class).add(Restrictions.eq("city", up.city)).add(Restrictions.eq("dayOfWeek", up.dayOfWeek)).setMaxResults(1).list();
+			Transaction tr = session.beginTransaction();
+			if(l!=null && l.size()>0){
+				up.id = l.get(0).id;
+				session.update(up);
+			}else{
+				up.id = null;
+				session.save(up);
+			}
+			tr.commit();
+			
+		}
 	}
 	//Parcel
 	public Parcel GetParcelById(int id) {
