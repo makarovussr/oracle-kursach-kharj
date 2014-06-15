@@ -38,12 +38,13 @@
 		<h:commandLink value="Change city"/><!-- TODO -->
 		<br />
 		
-		<h:commandButton value="Save">
-			<f:ajax execute="clientFirstName clientLastName clientMiddleName clientAddress clientEmail clientPhone #{clientBean.Update()}"
+		<h:commandButton value="Save" action="#{clientBean.Update()}">
+			<f:ajax execute="clientFirstName clientLastName clientMiddleName clientAddress clientEmail clientPhone"
 				render="clientForm" />
 		</h:commandButton>
 		
-	</h:form>
+		</h:form>
+	
 	<a href="index.xhtml">Index</a>
 </h:body>
 

@@ -55,7 +55,10 @@ public class SelectCityBean {
 		public List<City> getCities() {
 			DBConnector connector = new DBConnector();
 			if(name != null && name.length()>0)
-				cities = connector.GetCitiesByName("K");
+				cities = connector.GetCitiesByName(name);
+			else
+				cities = new ArrayList<City>();
+			System.out.print(cities);
 			connector.Close();
 			return cities;
 		}

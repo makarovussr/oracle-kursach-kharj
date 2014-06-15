@@ -22,6 +22,7 @@ public class ClientBean {
 	private Client client = null;
 
 	public String Update(){
+		System.out.println("Update");
 		if(id == null) return "";
 		DBConnector connector = new DBConnector();
 		client = connector.GetClientById(id);
@@ -38,17 +39,16 @@ public class ClientBean {
 		return "";
 	}
 	private void LoadClient(){
-		if(id == null){
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 			String strId = params.get("selectedClientId");
 			try {
 				id = Integer.parseInt(strId);
 			} catch (Exception e) {
-				System.out.print("Client not found by id "+id);
+				//System.out.print("error parse id = "+id);
 			}
-		}
 
-		if(client == null){
+
+			if(client == null || !(id.equals(client.id))){
 			DBConnector connector = new DBConnector();
 			client = connector.GetClientById(id);
 			connector.Close();
@@ -60,6 +60,7 @@ public class ClientBean {
 			firstName = client.firstName;
 			middleName = client.middleName;
 			lastName = client.lastName;
+			address = client.address;
 			email = client.lastName;
 			phone = client.phone;
 			city = client.city;

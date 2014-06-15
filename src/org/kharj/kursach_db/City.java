@@ -60,5 +60,13 @@ public class City {
 		return "City [id=" + id + ", name=" + name + ", address=" + address
 				+ ", phone=" + phone + "]";
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 }
