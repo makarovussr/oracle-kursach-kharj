@@ -22,6 +22,7 @@
 		<h:commandButton value="Search">
 			<f:ajax execute="vehicleRegNum vehicleModel "
 				render="vehiclesTable" />
+					<f:param name="act" value="#{selectVehicleBean.act}" />
 		</h:commandButton>
 		<h:dataTable value="#{selectVehicleBean.vehicles}" var="vehicle"
 			id="vehiclesTable" border="1">
@@ -60,6 +61,7 @@
 				</f:facet>
 				<h:commandButton value="Use" action="#{selectVehicleBean.Select}" >
 					<f:param name="selectedIdStr" value="#{vehicle.id}" />
+					<f:param name="act" value="#{selectVehicleBean.act}" />
 				</h:commandButton>
 			</h:column>
 

@@ -29,6 +29,7 @@ public class VehicleBean {
 			vehicle.registrationNumber = registrationNumber;
 			vehicle.model = model;
 			vehicle.maxLoad = maxLoad;
+			vehicle.homeCity = homeCity;
 			connector.UpdateVehicle(vehicle);
 		}
 		connector.Close();
@@ -79,11 +80,20 @@ public class VehicleBean {
 	}
 	public City getHomeCity() {
 		LoadVehicle();
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String strCityId = params.get("selectedCityId");
+		if(strCityId != null){
+			Integer cityId = null;
+			try {
+				cityId = Integer.parseInt(strCityId);
+			} catch (Exception e) {}
+			DBConnector connector = new DBConnector();
+			homeCity = connector.GetCityById(cityId);
+			connector.Close();
+		}
 		return homeCity;
 	}
-	public void setHomeCity(City homeCity) {
-		this.homeCity = homeCity;
-	}
+
 	public Float getMaxLoad() {
 		LoadVehicle();
 		return maxLoad;

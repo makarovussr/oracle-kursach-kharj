@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Select parcel</title>
+</h:head>
+
+<h:body>
+	<h:form>
+	<h:outputText value="Id:  " />
+		<h:inputText value="#{selectParcelBean.id}" size="20"
+			id="parcelId" />
+		<br />
+		<h:outputText value="Client:  " />
+		<h:outputText value="#{selectParcelBean.clientFrom.lastName} #{selectParcelBean.clientFrom.firstName}" size="20"
+			id="parcelClientFrom" />
+		<a href="SelectClient.xhtml?act=parcelFrom">Select client</a>
+		<br />
+		<h:outputText value="From: " />
+		<h:outputText value="#{selectParcelBean.cityFrom}" size="20"
+			id="parcelFrom" />
+		<a href="SelectCity.xhtml?act=parcelFrom">Select city from </a>
+		<br />
+		<h:outputText value="To: " />
+		<h:outputText value="#{selectParcelBean.cityTo}" size="20"
+			id="parcelTo" />
+		<a href="SelectCity.xhtml?act=parcelTo">Select city to</a>
+		<br />
+		<h:outputText value="Route: " />
+		<h:outputText value="#{selectParcelBean.route}" size="20"
+			id="parcelRoute" />
+		<a href="SelectRoute.xhtml?act=parcelSearchRoute">Select route</a>
+		<br />
+		
+		<h:commandButton value="Search">
+			<f:ajax execute="parcelClientFrom parcelFrom parcelTo parcelRoute parcelId"
+				render="parcelsTable" />
+					<f:param name="act" value="#{selectParcelBean.act}" />
+		</h:commandButton>
+		
+		<h:commandButton value="Reset" action="#{selectParcelBean.Reset()}">
+			<f:ajax execute=""
+				render="parcelClientFrom parcelFrom parcelTo parcelRoute parcelsTable" />
+					<f:param name="act" value="#{selectParcelBean.act}" />
+		</h:commandButton>
+		
+		
+		<h:dataTable value="#{selectParcelBean.parcels}" var="parcel"
+			id="parcelsTable" border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="id" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.id}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Client from" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.clientFrom.lastName} #{parcel.clientFrom.firstName}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Client to" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.clientTo.lastName} #{parcel.clientTo.firstName}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="City from" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.cityFrom.name}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="City to" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.cityTo.name}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Route" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.route}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Type" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.parcelType}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Weight" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.weight}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Price" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.price}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Date" />
+				</f:facet>
+				<h:outputText
+					value="#{parcel.acceptDate}" />
+			</h:column>
+			
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:commandButton value="Use" action="#{selectParcelBean.Select}" >
+					<f:param name="selectedIdStr" value="#{parcel.id}" />
+					<f:param name="act" value="#{selectParcelBean.act}" />
+				</h:commandButton>
+				
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+	<a href="index.xhtml">Index</a>
+</h:body>
+
+</html>

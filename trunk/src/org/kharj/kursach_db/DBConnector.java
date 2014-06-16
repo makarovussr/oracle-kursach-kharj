@@ -254,15 +254,31 @@ public class DBConnector {
 	public ParcelType GetParcelTypeById(int id){
 		return (ParcelType)session.get(ParcelType.class, id);
 	}
+	
+	public List<ParcelType> GetParcelTypes(){
+		return session.createCriteria(ParcelType.class).list();
+	}
+	
 	//Parcel
 	public Parcel GetParcelById(int id) {
 		Parcel parcel = (Parcel) session.get(Parcel.class, id);
 		return parcel;			
 	}
 	
+	public List<Parcel> GetParcelsById(int id) {
+		List<Parcel> l = session.createCriteria(Parcel.class).add(Restrictions.eq("id", id)).list();
+		return l;
+		
+	}
+	
 	public List<Parcel> GetParcelsByClient(Client c){
 	
 		List<Parcel> l = session.createCriteria(Parcel.class).add( Restrictions.or(Restrictions.eq("clientFrom", c), Restrictions.eq("clientTo", c))).list();
+		return l;
+	}
+	public List<Parcel> GetParcelsFromCityToCity(City fr, City t){
+		
+		List<Parcel> l = session.createCriteria(Parcel.class).add(Restrictions.eq("cityFrom", fr)).add(Restrictions.eq("cityTo", t)).list();
 		return l;
 	}
 	
@@ -276,6 +292,36 @@ public class DBConnector {
 			return GetRouteLastLocation(p.route);
 		}
 		return null;
+	}
+	
+	public void UpdateParcel(Parcel p){
+		Transaction tr = session.beginTransaction();
+		Parcel cl = (Parcel)session.load(Parcel.class, p.id);
+		cl.acceptDate = p.acceptDate;
+		cl.cityFrom =p.cityFrom;
+		cl.cityTo = p.cityTo;
+		cl.clientFrom = p.clientFrom;
+		cl.clientTo = p.clientTo;
+		cl.description = p.description;
+		cl.parcelType = p.parcelType;
+		cl.price = p.price;
+		cl.route = p.route;
+		cl.weight = p.weight;
+		tr.commit();
+		
+	}
+	
+	public Parcel CreateEmptyParcel(){
+		Parcel p = new Parcel(null, null, null, null, null, null, 0.0f, "");
+		Transaction tr = session.beginTransaction();
+		session.save(p);	
+		tr.commit();
+		List <Parcel> l = session.createCriteria(Parcel.class).addOrder(Order.desc("id")).setMaxResults(1).list();
+		if(l != null && l.size() >0){
+			return l.get(0);
+		}
+		return null;
+		
 	}
 	//Rate
 	public Rate GetRateById(int id){
@@ -297,6 +343,7 @@ public class DBConnector {
 		Rate r = GetRateForParcel(p);
 		if(r==null){
 			ParcelException ex = new ParcelException("Rate not found");
+			System.out.print("Rate not found.");
 			ex.rateNotFound = true;
 			throw ex;
 		}
@@ -311,6 +358,7 @@ public class DBConnector {
 	}
 	public List<Route> GetRoutesForParcel(Parcel p){
 		List<Route> routes = GetRoutesFromCityToCity(p.cityFrom, p.cityTo);
+		return routes;/*
 		List<Route> okRoutes = new ArrayList<Route>();
 		for(Route route : routes){
 			Boolean fuckThisRoute = false;
@@ -345,7 +393,7 @@ public class DBConnector {
 					}
 					if(freeCountParcelType<0 || freeWeightParcelType < 0.0f || freeWeightVehicle<0.0f){
 						//NO
-						fuckThisRoute = true;
+						//fuckThisRoute = true;
 						break;
 					}//if					
 				}//for p
@@ -357,7 +405,10 @@ public class DBConnector {
 			}
 			fuckThisRoute = false;
 		}
+		
 		return okRoutes;
+		//System.out.print(routes);
+		//return routes;*/
 	}
 	
 	public List<RouteMap> GetRoutemapByRoute(Route r){
@@ -421,6 +472,24 @@ public class DBConnector {
 		
 		
 	}
+	public void UpdateRoute(Route r){
+		Transaction tr = session.beginTransaction();
+		Route cl = (Route)session.load(Route.class, r.id);
+		cl.vehicle = r.vehicle;
+		tr.commit();
+	}
+		
+	public void RemoveRouteMap(RouteMap s){
+		Transaction tr = session.beginTransaction();
+		RouteMap dbS = (RouteMap)session.load(RouteMap.class, s.id);
+		if(dbS!=null){
+			session.delete(dbS);
+		}
+		tr.commit();
+	}
+	
+	
+	
 	//Vehicle
 	public Vehicle GetVehicleById(int id){
 		return (Vehicle)session.get(Vehicle.class, id);

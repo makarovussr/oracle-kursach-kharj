@@ -30,6 +30,7 @@
 		<h:commandButton value="Search">
 			<f:ajax execute="clientName clientAddress clientEmail clientPhone"
 				render="clientsTable" />
+					<f:param name="act" value="#{selectClientBean.act}" />
 		</h:commandButton>
 		<h:dataTable value="#{selectClientBean.clients}" var="client"
 			id="clientsTable" border="1">
@@ -61,6 +62,7 @@
 				</f:facet>
 				<h:commandButton value="Use" action="#{selectClientBean.Select}" >
 					<f:param name="selectedIdStr" value="#{client.id}" />
+					<f:param name="act" value="#{selectClientBean.act}" />
 				</h:commandButton>
 			</h:column>
 

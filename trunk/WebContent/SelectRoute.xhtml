@@ -1,10 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Select route</title>
+</h:head>
 
-</body>
+<h:body>
+	<h:form>
+		<h:outputText value="From: " />
+		<h:outputText value="#{selectRouteBean.cityFrom.name}" size="20"
+			id="routeFrom" />
+		<a href="SelectCity.xhtml?act=routeFrom#{selectRouteBean.act}">Select city from</a>
+		<br />
+		<h:outputText value="To: " />
+		<h:outputText value="#{selectRouteBean.cityTo.name}" size="20"
+			id="routeTo" />
+		<a href="SelectCity.xhtml?act=routeTo#{selectRouteBean.act}">Select city from</a>
+		<br />
+		dd.MM.yyyy HH:mm:ss
+		<br />
+		<h:outputText value="date from: " />
+		<h:inputText value="#{selectRouteBean.dateFrom}" size="20"
+			id="routeDateFrom">			
+			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+			</h:inputText>
+		<br />
+		<h:outputText value="date to: " />
+		<h:inputText value="#{selectRouteBean.dateTo}" size="20"
+			id="routeDateTo">			
+			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+			</h:inputText>
+
+		<br />
+		<h:outputText value="Parcel:  " />
+		<h:outputText value="#{selectRouteBean.parcel}" id="routeParcel" />
+		<a href="SelectParcel.xhtml">Select parcel</a>
+		<br />
+		
+		<h:commandButton value="Search">
+			<f:ajax execute="routeFrom routeTo routeDateFrom routeDateFrom routeParcel"
+				render="routesTable" />
+					<f:param name="act" value="#{selectRouteBean.act}" />
+		</h:commandButton>
+		
+		<h:dataTable value="#{selectRouteBean.routes}" var="route"
+			id="routesTable" border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="id" />
+				</f:facet>
+				<h:outputText
+					value="#{route.id}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="vehicle" />
+				</f:facet>
+				<h:outputText
+					value="#{route.vehicle}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:commandButton value="Use" action="#{selectRouteBean.Select}" >
+					<f:param name="selectedIdStr" value="#{route.id}" />
+					<f:param name="act" value="#{selectRouteBean.act}" />
+				</h:commandButton>
+			</h:column>
+
+
+
+		</h:dataTable>
+	</h:form>
+	<a href="index.xhtml">Index</a>
+</h:body>
+
 </html>

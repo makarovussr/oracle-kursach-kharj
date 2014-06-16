@@ -34,8 +34,10 @@
 		<h:inputText value="#{clientBean.phone}" size="20"
 			id="clientPhone" />
 		<br />
+		press save after city change.
+		<br />
 		<h:outputText value="City: #{clientBean.city.name} " />
-		<h:link value="Change city"/><!-- TODO -->
+		<a href="SelectCity.xhtml?act=clientChange">Change city</a>
 		<br />
 		
 		<h:commandButton value="Save" action="#{clientBean.Update()}">

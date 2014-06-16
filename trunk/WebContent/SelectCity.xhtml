@@ -26,6 +26,7 @@
 		<h:commandButton value="Search">
 			<f:ajax execute="cityName"
 				render="citiesTable" />
+					<f:param name="act" value="#{selectCityBean.act}" />
 		</h:commandButton>
 		<h:dataTable value="#{selectCityBean.cities}" var="city"
 			id="citiesTable" border="1">
@@ -57,6 +58,7 @@
 				</f:facet>
 				<h:commandButton value="Use" action="#{selectCityBean.Select}" >
 					<f:param name="selectedIdStr" value="#{city.id}" />
+					<f:param name="act" value="#{selectCityBean.act}" />
 				</h:commandButton>
 			</h:column>
 

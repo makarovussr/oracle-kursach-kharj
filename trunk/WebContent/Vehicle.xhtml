@@ -18,10 +18,12 @@
 		<h:inputText value="#{vehicleBean.model}" size="20"
 			id="vehicleModel" />
 		<br />
+		press save after change city!!!
+		<br />
 		<h:outputText value="Home city: " />
 		<h:outputText value="#{vehicleBean.homeCity.name}" 
 			id="vehicleCity" />
-			<h:link value=" Change city"/><!-- TODO -->
+		<a href="SelectCity.xhtml?act=vehicleChange">Change city</a>
 		<br />
 		<h:outputText value="Current location: #{vehicleBean.currentLocation.city.name} since " />
 		<h:outputText value="#{vehicleBean.currentLocation.stopDate}" >

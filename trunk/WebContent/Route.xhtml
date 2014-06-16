@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Route page</title>
+</h:head>
 
-</body>
+<h:body>
+	<h:form id="routeForm">
+		<h:outputText value="Vehicle:" />
+		<br />
+		<h:outputText value="#{routeBean.vehicle}" size="20"
+			id="routeVehicle" />
+		<br />
+		<a href="SelectVehicle.xhtml?act=routeChange"> Change vehicle</a>
+		<br />
+		<h:outputText value="  you dont need press Save after Remove. if row not deleted press again" />
+		<br />
+		dd.MM.yyyy HH:mm:ss
+		<br />
+		<h:dataTable value="#{routeBean.routeMaps}" var="routeMap"
+			id="routeMapsTable" border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="City" />
+				</f:facet>
+				<h:outputText value="#{routeMap.city.name}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Time" />
+				</f:facet>
+				<h:outputText value="#{routeMap.stopDate}">
+			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+				</h:outputText>
+			</h:column>
+
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Remove" />
+				</f:facet>
+				<h:commandButton value="Remove" action="#{routeBean.DeleteRouteMapRow()}" ajax="true">
+					<f:param name="mapRemoveIdStr" value="#{routeMap.id}" />
+					<f:ajax render="routeMapsTable" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		
+		<h:commandButton value="Save" action="#{routeBean.Update()}">
+			<f:ajax execute="routeVehicle"
+				render="routeForm" />
+		</h:commandButton>
+	</h:form>
+	
+	
+	
+	
+	<a href="index.xhtml">Index</a>
+</h:body>
+
 </html>

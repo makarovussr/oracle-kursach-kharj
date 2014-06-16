@@ -28,33 +28,33 @@ public class Parcel {
 	public Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "client_from", nullable = false)
+    @JoinColumn(name = "client_from", nullable = true)
 	public Client clientFrom;
     
     @ManyToOne
-    @JoinColumn(name = "client_to", nullable = false)
+    @JoinColumn(name = "client_to", nullable = true)
 	public Client clientTo;
     
     @ManyToOne
-    @JoinColumn(name = "parcel_type", nullable = false)
+    @JoinColumn(name = "parcel_type", nullable = true)
 	public ParcelType parcelType;
     
     @ManyToOne
-    @JoinColumn(name = "city_from", nullable = false)
+    @JoinColumn(name = "city_from", nullable = true)
 	public City cityFrom;
     
     @ManyToOne
-    @JoinColumn(name = "city_to", nullable = false)
+    @JoinColumn(name = "city_to", nullable = true)
 	public City cityTo;
 	
     @ManyToOne
     @JoinColumn(name = "route", nullable = true)
 	public Route route;
 
-	@Column(name="weight", nullable = false)
+	@Column(name="weight", nullable = true)
 	public Float weight;
 	
-	@Column(name="description")
+	@Column(name="description", nullable = true)
 	public String description;
 	
 	@Column(name="price", nullable = true)
