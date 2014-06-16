@@ -21,6 +21,7 @@ public class SelectClientBean {
 		private String phone = "";
 		private String navigateTo = "Client.xhtml";
 		private Integer selectedId = null;
+		private String act = "";
 		
 		public String Select(){
 			//clean
@@ -31,7 +32,31 @@ public class SelectClientBean {
 			clients = new ArrayList<Client>();
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		  String strId = params.get("selectedIdStr");
-
+		  
+		//targets
+			String act = params.get("act");
+			System.out.print("act==="+act);
+			navigateTo = "Client.xhtml";
+			if(act != null && act.equals("parcelTo")){
+				navigateTo = "SelectParcel.xhtml?clientParam=to";
+			}else if(act != null && act.equals("parcelFrom")){
+				navigateTo = "SelectParcel.xhtml?clientParam=from";
+			}else if(act != null && act.equals("parcelChangeTo")){
+				navigateTo = "Parcel.xhtml?clientParam=to";
+			}else if(act != null && act.equals("parcelChangeFrom")){
+				navigateTo = "Parcel.xhtml?clientParam=from";
+			}
+			
+			
+			
+			
+			/*else if(act != null && act.equals("clientChange")){
+				navigateTo = "Client.xhtml";
+			}else if(act != null && act.equals("vehicleChange")){
+				navigateTo = "Vehicle.xhtml";
+			}*/
+			
+			
 			Integer id = null;
 			try {
 				id = Integer.parseInt(strId);
@@ -108,6 +133,9 @@ public class SelectClientBean {
 		}
 		public void setSelectedId(Integer selectedId) {
 			this.selectedId = selectedId;
+		}
+		public String getAct() {
+			return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
 		}
 }
 

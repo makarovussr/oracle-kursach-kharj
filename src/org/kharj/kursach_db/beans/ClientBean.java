@@ -33,6 +33,7 @@ public class ClientBean {
 			client.address = address;
 			client.phone = phone;
 			client.email = email;
+			client.city = city;
 			connector.UpdateClient(client);
 		}
 		connector.Close();
@@ -111,6 +112,17 @@ public class ClientBean {
 	}
 	public City getCity() {
 		LoadClient();
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String strCityId = params.get("selectedCityId");
+		if(strCityId != null){
+			Integer cityId = null;
+			try {
+				cityId = Integer.parseInt(strCityId);
+			} catch (Exception e) {}
+			DBConnector connector = new DBConnector();
+			city = connector.GetCityById(cityId);
+			connector.Close();
+		}
 		return city;
 	}
 	public Client getClient() {

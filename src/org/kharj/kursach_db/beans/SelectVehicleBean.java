@@ -17,6 +17,7 @@ public class SelectVehicleBean {
 		private Float maxLoad = 0.0f;
 		private City homeCity = null;
 		private String model = "";
+		private String act = "";
 		private String navigateTo = "Vehicle.xhtml";
 		private Integer selectedId = null;
 		private List<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -29,7 +30,11 @@ public class SelectVehicleBean {
 			vehicles = new ArrayList<Vehicle>();
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		  String strId = params.get("selectedIdStr");
-
+		  String strAct = params.get("act");
+		  navigateTo = "Vehicle.xhtml";
+		  if(strAct.equals("routeChange")){
+			  navigateTo = "Route.xhtml";
+		  }
 			Integer id = null;
 			try {
 				id = Integer.parseInt(strId);
@@ -116,6 +121,9 @@ public class SelectVehicleBean {
 				vehicles = connector.GetVehiclesByModel(model);
 			connector.Close();
 			return vehicles;
+		}
+		public String getAct() {
+			return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
 		}
 
 }

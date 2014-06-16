@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>View Parcel</title>
+</h:head>
+
+<h:body>
+	<h:form id="parcelForm">
+		<h:outputText value="Client from:  " />
+		<h:outputText value="#{parcelBean.clientFrom.lastName} #{parcelBean.clientFrom.firstName}" size="20"
+			id="parcelClientFrom" />
+		<a href="SelectClient.xhtml?act=parcelChangeFrom">Select client from</a>
+		<br />
+		
+		<h:outputText value="Client To:  " />
+		<h:outputText value="#{parcelBean.clientTo.lastName} #{parcelBean.clientTo.firstName}" size="20"
+			id="parcelClientTo" />
+		<a href="SelectClient.xhtml?act=parcelChangeTo">Select client to </a>
+		<br />
+		
+		<h:outputText value="From: " />
+		<h:outputText value="#{parcelBean.cityFrom.name}" size="20"
+			id="parcelFrom" />
+		<a href="SelectCity.xhtml?act=parcelChangeFrom">Select city from </a>
+		<br />
+		<h:outputText value="To: " />
+		<h:outputText value="#{parcelBean.cityTo.name}" size="20"
+			id="parcelTo" />
+		<a href="SelectCity.xhtml?act=parcelChangeTo">Select city to</a>
+		<br />
+		<h:outputText value="Type: " />
+		<h:outputText value="#{parcelBean.parcelType}" size="20"
+			id="parcelType" />
+		<a href="SelectParcelType.xhtml?act=parcelChangeType">Select type</a>
+		<br />
+		<h:outputText value="Weight: " />
+		<h:inputText value="#{parcelBean.weight}" size="20"
+			id="parcelWeight">
+			<f:convertNumber />
+			</h:inputText>
+		<br />
+		
+		<h:outputText value="Desription: " />
+		<h:inputText value="#{parcelBean.description}" size="100"
+			id="parcelDescription" />
+		<br />
+		
+		<h:outputText value="Accept date " />
+		<h:outputText value="#{parcelBean.acceptDate}" size="20"
+			id="parcelAcceptDate" />
+		<br />
+		
+		<h:outputText value="Price: " />
+		<h:outputText value="#{parcelBean.price}" size="20"
+			id="parcelPrice" />
+			
+		<br />
+		<h:outputText value="Route: " />
+		<h:outputText value="#{parcelBean.route}" size="20"
+			id="parcelRoute" />
+		<a href="SelectRoute.xhtml?act=parcelChangeRoute&amp;selectedParcelId=#{parcelBean.id}">Select route</a>
+		<br />
+		
+		
+		
+		<h:commandButton value="Save" action="#{parcelBean.Update()}">
+			<f:ajax execute="parcelClientFrom parcelClientTo parcelFrom parcelTo parcelWeight parcelDescription"
+				render="parcelForm" />
+		</h:commandButton>
+	</h:form>
+	<a href="index.xhtml">Index</a>
+</h:body>
+
+</html>
