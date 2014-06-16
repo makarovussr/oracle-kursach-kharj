@@ -17,9 +17,8 @@ public class Kursach_win {
 		try{
 			DBConnector connector = new DBConnector();
 			//connector.FillDB()
-			java.sql.Date d1 =  new Date(new Timestamp(2014-1900, 5 - 1, 17, 0, 0, 0, 0).getTime());
-			java.sql.Date d2 =  new Date(new Timestamp(2014-1900, 5 - 1, 17, 23, 59, 59, 0).getTime());
-			System.out.print(connector.GetRoutesFromCityToCityBetweenDate(connector.GetCityById(4), connector.GetCityById(1), d1, d2));
+			Parcel testParcel = new Parcel(connector.GetClientById(1), connector.GetClientById(2), connector.GetParcelTypeById(19), connector.GetCityById(4), connector.GetCityById(1), null, 60.0f, "lalka");
+			System.out.print(connector.GetRoutesForParcel(testParcel));
 			connector.Close();
 		}catch(Exception ex){
 			ex.printStackTrace();
