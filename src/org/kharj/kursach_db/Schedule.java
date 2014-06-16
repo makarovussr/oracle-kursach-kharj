@@ -1,7 +1,7 @@
 package org.kharj.kursach_db;
 import javax.persistence.*;
 
-import java.sql.Date;
+import java.util.Date;//<<<< here changed
 import java.sql.Time;
 import java.sql.Timestamp;
 

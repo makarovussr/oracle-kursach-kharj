@@ -250,6 +250,10 @@ public class DBConnector {
 			
 		}
 	}
+	//Parcel type
+	public ParcelType GetParcelTypeById(int id){
+		return (ParcelType)session.get(ParcelType.class, id);
+	}
 	//Parcel
 	public Parcel GetParcelById(int id) {
 		Parcel parcel = (Parcel) session.get(Parcel.class, id);
@@ -306,8 +310,54 @@ public class DBConnector {
 		return (Route)session.get(Route.class, id);
 	}
 	public List<Route> GetRoutesForParcel(Parcel p){
-		//TODO:
-		return null;
+		List<Route> routes = GetRoutesFromCityToCity(p.cityFrom, p.cityTo);
+		List<Route> okRoutes = new ArrayList<Route>();
+		for(Route route : routes){
+			Boolean fuckThisRoute = false;
+			VehicleMaxload vMaxLoad = GetMaxLoadByVehicleAndParcelType(route.vehicle, p.parcelType);
+			Float freeWeightVehicle = route.vehicle.maxLoad;
+			Float freeWeightParcelType = vMaxLoad.maxWeight;
+			Integer freeCountParcelType = vMaxLoad.maxCount;
+			List<RouteMap> maps = GetRoutemapByRoute(route);
+			List<Parcel> parcels = GetParcelsByRoute(route);
+			parcels.add(p);
+			List<Parcel> startedParcels = new ArrayList<Parcel>();
+			List<Parcel> finishedParcels = new ArrayList<Parcel>();
+			for(RouteMap m : maps){
+				for(Parcel curP : parcels){
+					if(curP.cityFrom.equals(m.city) && !(startedParcels.contains(curP)) && !(finishedParcels.contains(curP))){//this is start city, but parcel didnt startted yet
+						//start
+						startedParcels.add(p);
+						freeWeightVehicle -= curP.weight;
+						if(p.parcelType.equals(curP.parcelType)){
+							freeWeightParcelType -= curP.weight;
+							freeCountParcelType -= 1;
+						}
+					}
+					if(curP.cityTo.equals(m.city) && (startedParcels.contains(curP)) && !(finishedParcels.contains(curP))){//this is end city, but parcel didnt startted yet
+						//finish
+						finishedParcels.add(p);
+						freeWeightVehicle += curP.weight;
+						if(p.parcelType.equals(curP.parcelType)){
+							freeWeightParcelType += curP.weight;
+							freeCountParcelType += 1;
+						}
+					}
+					if(freeCountParcelType<0 || freeWeightParcelType < 0.0f || freeWeightVehicle<0.0f){
+						//NO
+						fuckThisRoute = true;
+						break;
+					}//if					
+				}//for p
+
+				if(fuckThisRoute) break;//next route
+			}//for m
+			if(!fuckThisRoute){
+				okRoutes.add(route);
+			}
+			fuckThisRoute = false;
+		}
+		return okRoutes;
 	}
 	
 	public List<RouteMap> GetRoutemapByRoute(Route r){
@@ -349,6 +399,20 @@ public class DBConnector {
 		}
 		return res;
 		
+	}
+	public List<Route> GetRoutesFromCityToCity(City fromC, City toC){
+		List <RouteMap> rmFrom = session.createCriteria(RouteMap.class).add(Restrictions.eq("city", fromC)).addOrder(Order.asc("stopDate")).list();
+		List<Route> res = new ArrayList<Route>();
+		for(RouteMap m : rmFrom){
+			if(!res.contains(m.route)){
+				List <RouteMap> rmTo = session.createCriteria(RouteMap.class).add(Restrictions.eq("route", m.route)).add(Restrictions.eq("city", toC)).add(Restrictions.gt("stopDate", m.stopDate)).list();
+				if(rmTo != null && !rmTo.isEmpty()){
+					//found
+					res.add(m.route);
+				}
+			}
+		}
+		return res;
 		
 	}
 	public Boolean PlaceForParcelInRoute(Parcel p){
@@ -361,7 +425,7 @@ public class DBConnector {
 	public Vehicle GetVehicleById(int id){
 		return (Vehicle)session.get(Vehicle.class, id);
 	}
-	public RouteMap GetVehicleLastLocation(Vehicle v){
+	public RouteMap GetVehicleCurrentLocation(Vehicle v){
 		java.util.Date now = new java.util.Date();
 		List<RouteMap> l = session.createCriteria(RouteMap.class).createAlias("route", "route").add(Restrictions.eq("route.vehicle", v)).add(Restrictions.le("stopDate", now)).addOrder(Order.desc("stopDate")).setMaxResults(1).list();
 		if(l != null && l.size()>0){
@@ -369,5 +433,46 @@ public class DBConnector {
 		}
 		return null;
 	}
+	public RouteMap GetVehicleLastLocation(Vehicle v){
+		List<RouteMap> l = session.createCriteria(RouteMap.class).createAlias("route", "route").add(Restrictions.eq("route.vehicle", v)).addOrder(Order.desc("stopDate")).setMaxResults(1).list();
+		if(l != null && l.size()>0){
+			return l.get(0);
+		}
+		return null;
+	}
+	public List<Vehicle> GetVehiclesByRegNumber(String regNum){
+		List<Vehicle> l = session.createCriteria(Vehicle.class).add(Restrictions.ilike("registrationNumber", regNum, MatchMode.ANYWHERE)).list();
+		return l;
+	}
+	public List<Vehicle> GetVehiclesByModel(String model){
+		List<Vehicle> l = session.createCriteria(Vehicle.class).add(Restrictions.ilike("model", model, MatchMode.ANYWHERE)).list();
+		return l;
+	}
+	public void UpdateVehicle(Vehicle v){
+		Transaction tr = session.beginTransaction();
+		Vehicle cl = (Vehicle)session.load(Vehicle.class, v.id);
+		cl.registrationNumber = v.registrationNumber;
+		cl.model = v.model;
+		cl.maxLoad = v.maxLoad;
+		cl.homeCity = v.homeCity;
+		tr.commit();
+		
+	}
+	//Max Load
+	public VehicleMaxload GetMaxLoadByVehicleAndParcelType(Vehicle v, ParcelType pt){
+		List<VehicleMaxload> l = session.createCriteria(VehicleMaxload.class).add(Restrictions.eq("vehicle", v)).add(Restrictions.eq("parcelType", pt)).setMaxResults(1).list();
+		if(l != null && l.size()>0){
+			return l.get(0);
+		}
+		return null;
+	}
+	public List<VehicleMaxload> GetMaxLoadsByVehicle(Vehicle v){
+		List<VehicleMaxload> l = session.createCriteria(VehicleMaxload.class).add(Restrictions.eq("vehicle", v)).list();
+		return l;
+	}
+	
+	
+	
+	
 	
 }

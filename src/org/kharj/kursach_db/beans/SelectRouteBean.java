@@ -2,6 +2,7 @@ package org.kharj.kursach_db.beans;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,23 +10,24 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
 import org.kharj.kursach_db.*;
-@ManagedBean(name = "selectVehicleBean", eager = true)
+@ManagedBean(name = "selectRouteBean", eager = true)
 @SessionScoped
-public class SelectVehicleBean {
+public class SelectRouteBean {
 
-		private String registrationNumber = "";
+		private Vehicle vehicle = null;
 		private Float maxLoad = 0.0f;
-		private City homeCity = null;
-		private String model = "";
+		private City cityFrom = null;
+		private City cityTo = null;
+		private Date dateFrom = null;
+		private Date dateTo = null;
+		private Float weight = 0.0f;
+		private ParcelType parcelType = null;
 		private String navigateTo = "Vehicle.xhtml";
 		private Integer selectedId = null;
 		private List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		public String Select(){
 			//clean
-			setRegistrationNumber("");
-			setMaxLoad(0.0f);
-			setHomeCity(null);
-			setModel("");
+		
 			vehicles = new ArrayList<Vehicle>();
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		  String strId = params.get("selectedIdStr");
@@ -68,14 +70,7 @@ public class SelectVehicleBean {
 			this.selectedId = selectedId;
 		}
 
-		public String getRegistrationNumber() {
-			return registrationNumber;
-		}
-
-
-		public void setRegistrationNumber(String registrationNumber) {
-			this.registrationNumber = registrationNumber;
-		}
+		
 
 
 		public Float getMaxLoad() {
@@ -88,35 +83,8 @@ public class SelectVehicleBean {
 		}
 
 
-		public City getHomeCity() {
-			return homeCity;
-		}
+		
 
-
-		public void setHomeCity(City homeCity) {
-			this.homeCity = homeCity;
-		}
-
-
-		public String getModel() {
-			return model;
-		}
-
-
-		public void setModel(String model) {
-			this.model = model;
-		}
-
-
-		public List<Vehicle> getVehicles() {
-			DBConnector connector = new DBConnector();
-			if(registrationNumber != null && registrationNumber.length()>0)
-				vehicles = connector.GetVehiclesByRegNumber(registrationNumber);
-			else if(model != null && model.length()>0)
-				vehicles = connector.GetVehiclesByModel(model);
-			connector.Close();
-			return vehicles;
-		}
 
 }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Client page</title>
+</h:head>
+
+<h:body>
+	<h:form id="vehicleForm">
+		<h:outputText value="Registration number:" />
+		<h:inputText value="#{vehicleBean.registrationNumber}" size="20"
+			id="vehicleRegNum" />
+		<br />
+		<h:outputText value="Model: " />
+		<h:inputText value="#{vehicleBean.model}" size="20"
+			id="vehicleModel" />
+		<br />
+		<h:outputText value="Home city: " />
+		<h:outputText value="#{vehicleBean.homeCity.name}" 
+			id="vehicleCity" />
+			<h:link value=" Change city"/><!-- TODO -->
+		<br />
+		<h:outputText value="Current location: #{vehicleBean.currentLocation.city.name} since " />
+		<h:outputText value="#{vehicleBean.currentLocation.stopDate}" >
+			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+		</h:outputText>
+		<br />
+		<h:outputText value="Last location: #{vehicleBean.lastLocation.city.name} at " />
+		<h:outputText value="#{vehicleBean.lastLocation.stopDate}" >
+			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+		</h:outputText>
+		<br />
+		
+		<h:commandButton value="Save" action="#{vehicleBean.Update()}">
+			<f:ajax execute="vehicleRegNum vehicleModel vehicleCity"
+				render="vehicleForm" />
+		</h:commandButton>
+		
+		</h:form>
+	
+	<h:link value="Routes by this vehicle" action="/SelectRoute.xhtml?selectedVehicleId=#{vehicleBean.id}"/><!-- TODO -->
+	<br />
+	<br />
+	
+	<a href="index.xhtml">Index</a>
+</h:body>
+
+</html>
