@@ -16,7 +16,7 @@ public class Kursach_win {
 		// TODO Auto-generated method stub
 		try{
 			DBConnector connector = new DBConnector();
-			//connector.FillDB();
+			connector.FillDB();
 			//Parcel testParcel = new Parcel(connector.GetClientById(1), connector.GetClientById(2), connector.GetParcelTypeById(19), connector.GetCityById(4), connector.GetCityById(1), null, 60.0f, "lalka");
 			//System.out.print(connector.GetRoutesForParcel(testParcel));
 			connector.Close();

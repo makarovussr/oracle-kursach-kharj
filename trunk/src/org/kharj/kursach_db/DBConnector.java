@@ -132,7 +132,9 @@ public class DBConnector {
 					session.save(s);
 				}
 			}
-
+			//User
+			session.save(new User("admin", "admin", true));
+			session.save(new User("user", "user", false));
 			tr.commit();
 			}catch(Exception ex){
 				ex.printStackTrace();
@@ -540,7 +542,24 @@ public class DBConnector {
 		return l;
 	}
 	
-	
+	//User
+	public User GetUserById(int id){
+		return (User)session.get(User.class, id);
+	}
+	public User GetUserByLoginPassword(String login, String password){
+		List<User> l = session.createCriteria(User.class).add(Restrictions.eq("login", login)).add(Restrictions.eq("password", password)).list();
+		if(l != null && l.size()>0){
+			return l.get(0);
+		}
+		return null;
+	}
+	public Boolean UserIsAdmin(String login, String password){
+		User u = GetUserByLoginPassword(login, password);
+		if(u != null && u.isAdmin){
+			return true;
+		}
+		return false;
+	}
 	
 	
 	
