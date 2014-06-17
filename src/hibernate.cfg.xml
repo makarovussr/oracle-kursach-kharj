@@ -4,7 +4,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@//192.168.0.40:1521/XE</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@//127.0.0.1:1521/XE</property>
 		<property name="hibernate.connection.username">kharj</property>
 		<property name="hibernate.connection.password">pass</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
@@ -33,6 +33,7 @@
 		<mapping class="org.kharj.kursach_db.Route" />
 		<mapping class="org.kharj.kursach_db.RouteMap" />
 		<mapping class="org.kharj.kursach_db.Parcel" />
+		<mapping class="org.kharj.kursach_db.User" />
 
 	</session-factory>
 
