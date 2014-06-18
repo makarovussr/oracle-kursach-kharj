@@ -561,6 +561,18 @@ public class DBConnector {
 		return false;
 	}
 	
+	public Boolean CreateUser(String login, String password, Boolean isAdmin){
+		List <User>list = session.createCriteria(User.class).add(Restrictions.eq("login", login)).list();
+		if(list != null && list.size()>0){
+			return false;//found
+		}
+		Transaction tr = session.beginTransaction();
+		User u = new User(login,password, isAdmin);
+		session.save(u);
+		tr.commit();
+		return true;
+	}
+	
 	
 	
 }
