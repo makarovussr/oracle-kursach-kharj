@@ -3,12 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Default title</title>
 </h:head>
 
 <h:body>
+
+  <ui:include src="header.xhtml" />
+
 	<h:form>
 		<a href="SelectClient.xhtml">Select Client</a>
 		<br />
@@ -22,6 +26,7 @@
 		<br />
 		<a href="Parcel.xhtml?newParcel=1">Create new Parcel</a>
 	</h:form>
+	not b
 </h:body>
 
 </html>
