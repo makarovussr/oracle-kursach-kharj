@@ -10,68 +10,69 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form>
 		<h:outputText value="Name: " />
-		<h:inputText value="#{selectClientBean.name}" size="20"
+		<p:inputText value="#{selectClientBean.name}" size="20"
 			id="clientName" />
 		<br />
 		<h:outputText value="Address: " />
-		<h:inputText value="#{selectClientBean.address}" size="20"
+		<p:inputText value="#{selectClientBean.address}" size="20"
 			id="clientAddress" />
 		<br />
 		<h:outputText value="Email: " />
-		<h:inputText value="#{selectClientBean.email}" size="20"
+		<p:inputText value="#{selectClientBean.email}" size="20"
 			id="clientEmail" />
 		<br />
 		<h:outputText value="Phone: " />
-		<h:inputText value="#{selectClientBean.phone}" size="20"
+		<p:inputText value="#{selectClientBean.phone}" size="20"
 			id="clientPhone" />
 
 		<br />
-		<h:commandButton value="Search">
+		<p:commandButton value="Search">
 			<f:ajax execute="clientName clientAddress clientEmail clientPhone"
 				render="clientsTable" />
 					<f:param name="act" value="#{selectClientBean.act}" />
-		</h:commandButton>
-		<h:dataTable value="#{selectClientBean.clients}" var="client"
+		</p:commandButton>
+		<p:dataTable value="#{selectClientBean.clients}" var="client"
 			id="clientsTable" border="1">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Full name" />
 				</f:facet>
 				<h:outputText
 					value="#{client.lastName} #{client.firstName} #{client.middleName}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="City" />
 				</f:facet>
 				<h:outputText value="#{client.city.name}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Address" />
 				</f:facet>
 				<h:outputText value="#{client.address}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
-				<h:commandButton value="Use" action="#{selectClientBean.Select}" >
+				<p:commandButton value="Use" action="#{selectClientBean.Select}" >
 					<f:param name="selectedIdStr" value="#{client.id}" />
 					<f:param name="act" value="#{selectClientBean.act}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
 
 
-		</h:dataTable>
+		</p:dataTable>
 	</h:form>
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

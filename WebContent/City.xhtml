@@ -10,68 +10,69 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form id="cityForm">
 		<h:outputText value="Name:" />
-		<h:inputText value="#{cityBean.name}" size="20"
+		<p:inputText value="#{cityBean.name}" size="20"
 			id="cityName" />
 		<br />
 		<h:outputText value="Address: " />
-		<h:inputText value="#{cityBean.address}" size="20"
+		<p:inputText value="#{cityBean.address}" size="20"
 			id="cityAddress" />
 		<br />
 		<h:outputText value="Phone: " />
-		<h:inputText value="#{cityBean.phone}" size="20"
+		<p:inputText value="#{cityBean.phone}" size="20"
 			id="cityPhone" />
 		<br />
 		
 		<h:outputText value=" (0-6). you dont need press Save after Remove. if row not deleted press again" />
-		<h:dataTable value="#{cityBean.schedules}" var="schedule"
+		<p:dataTable value="#{cityBean.schedules}" var="schedule"
 			id="schedulesTable" border="1" styleClass="dataTable" rowClasses="rowOdd,rowEven">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Day of week" />
 				</f:facet>
-				<h:inputText value="#{schedule.dayOfWeek}" />
-			</h:column>
+				<p:inputText value="#{schedule.dayOfWeek}" />
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Open time" />
 				</f:facet>
-				<h:inputText value="#{schedule.openTime}">
+				<p:inputText value="#{schedule.openTime}">
 					<f:convertDateTime pattern="HH:mm" locale="en"/>
-				</h:inputText>
-			</h:column>
+				</p:inputText>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Close time" />
 				</f:facet>
-				<h:inputText value="#{schedule.closeTime}">
+				<p:inputText value="#{schedule.closeTime}">
 					<f:convertDateTime pattern="HH:mm" />
-				</h:inputText>
-			</h:column>
-			<h:column>
+				</p:inputText>
+			</p:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Remove" />
 				</f:facet>
-				<h:commandButton value="Remove" action="#{cityBean.DeleteScheduleRow}" ajax="true">
+				<p:commandButton value="Remove" action="#{cityBean.DeleteScheduleRow}" ajax="true">
 					<f:param name="schRemoveIdStr" value="#{schedule.id}" />
 					<f:ajax render="schedulesTable" />
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
 		
-		<h:commandButton value="Save" action="#{cityBean.Update()}">
+		<p:commandButton value="Save" action="#{cityBean.Update()}">
 			<f:ajax execute="cityName cityAddress cityPhone schedulesTable"
 				render="cityForm" />
-		</h:commandButton>
+		</p:commandButton>
 	</h:form>
 	
 	
 	
 	
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>
