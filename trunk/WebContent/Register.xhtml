@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Sign in</title>
+</h:head>
+
+<h:body>
+  <ui:include src="Header.xhtml" />
+	<h:form id="loginForm">
+		<h:outputText value="Login:" />
+		<p:inputText value="#{userBean.login_input}" size="20"
+			id="login" />
+		<br />Password: 
+		<p:password value="#{userBean.password_input}" size="20"
+			id="password" />
+		<br />
+		<h:outputText value="#{userBean.status}" id="status" />
+		
+		<p:commandButton value="Register" action="#{userBean.RegB()}" >
+			<f:ajax execute="login password"
+				render="loginForm status" />
+		</p:commandButton>	
+		
+	</h:form>
+		
+	
+		 <ui:include src="Footer.xhtml" />
+</h:body>
+
+</html>

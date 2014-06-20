@@ -9,14 +9,14 @@
 	<title>Client page</title>
 </h:head>
 
-<h:body>
+<h:body>  <ui:include src="Header.xhtml" />
 	<h:form id="vehicleForm">
 		<h:outputText value="Registration number:" />
-		<h:inputText value="#{vehicleBean.registrationNumber}" size="20"
+		<p:inputText value="#{vehicleBean.registrationNumber}" size="20"
 			id="vehicleRegNum" />
 		<br />
 		<h:outputText value="Model: " />
-		<h:inputText value="#{vehicleBean.model}" size="20"
+		<p:inputText value="#{vehicleBean.model}" size="20"
 			id="vehicleModel" />
 		<br />
 		press save after change city!!!
@@ -37,10 +37,10 @@
 		</h:outputText>
 		<br />
 		
-		<h:commandButton value="Save" action="#{vehicleBean.Update()}">
+		<p:commandButton value="Save" action="#{vehicleBean.Update()}">
 			<f:ajax execute="vehicleRegNum vehicleModel vehicleCity"
 				render="vehicleForm" />
-		</h:commandButton>
+		</p:commandButton>
 		
 		</h:form>
 	
@@ -48,7 +48,7 @@
 	<br />
 	<br />
 	
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

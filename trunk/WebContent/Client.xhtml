@@ -10,29 +10,30 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form id="clientForm">
 		<h:outputText value="Last name:" />
-		<h:inputText value="#{clientBean.lastName}" size="20"
+		<p:inputText value="#{clientBean.lastName}" size="20"
 			id="clientLastName" />
 		<br />
 		<h:outputText value="First name:" />
-		<h:inputText value="#{clientBean.firstName}" size="20"
+		<p:inputText value="#{clientBean.firstName}" size="20"
 			id="clientFirstName" />
 		<br />
 		<h:outputText value="Middle name:" />
-		<h:inputText value="#{clientBean.middleName}" size="20"
+		<p:inputText value="#{clientBean.middleName}" size="20"
 			id="clientMiddleName" />
 		<br />
 		<h:outputText value="Address: " />
-		<h:inputText value="#{clientBean.address}" size="20"
+		<p:inputText value="#{clientBean.address}" size="20"
 			id="clientAddress" />
 		<br />
 		<h:outputText value="Email: " />
-		<h:inputText value="#{clientBean.email}" size="20"
+		<p:inputText value="#{clientBean.email}" size="20"
 			id="clientEmail" />
 		<br />
 		<h:outputText value="Phone: " />
-		<h:inputText value="#{clientBean.phone}" size="20"
+		<p:inputText value="#{clientBean.phone}" size="20"
 			id="clientPhone" />
 		<br />
 		press save after city change.
@@ -41,14 +42,14 @@
 		<a href="SelectCity.xhtml?act=clientChange">Change city</a>
 		<br />
 		
-		<h:commandButton value="Save" action="#{clientBean.Update()}">
+		<p:commandButton value="Save" action="#{clientBean.Update()}">
 			<f:ajax execute="clientFirstName clientLastName clientMiddleName clientAddress clientEmail clientPhone"
 				render="clientForm" />
-		</h:commandButton>
+		</p:commandButton>
 		
 		</h:form>
 	
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

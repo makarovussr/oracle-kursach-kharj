@@ -10,67 +10,68 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form>
 		<h:outputText value="Reg. number: " />
-		<h:inputText value="#{selectVehicleBean.registrationNumber}" size="20"
+		<p:inputText value="#{selectVehicleBean.registrationNumber}" size="20"
 			id="vehicleRegNum" />
 		<br />
 		<h:outputText value="Model: " />
-		<h:inputText value="#{selectVehicleBean.model}" size="20"
+		<p:inputText value="#{selectVehicleBean.model}" size="20"
 			id="vehicleModel" />
 		<br />
 		
-		<h:commandButton value="Search">
+		<p:commandButton value="Search">
 			<f:ajax execute="vehicleRegNum vehicleModel "
 				render="vehiclesTable" />
 					<f:param name="act" value="#{selectVehicleBean.act}" />
-		</h:commandButton>
-		<h:dataTable value="#{selectVehicleBean.vehicles}" var="vehicle"
+		</p:commandButton>
+		<p:dataTable value="#{selectVehicleBean.vehicles}" var="vehicle"
 			id="vehiclesTable" border="1">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Reg. Number" />
 				</f:facet>
 				<h:outputText
 					value="#{vehicle.registrationNumber}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Home city" />
 				</f:facet>
 				<h:outputText value="#{vehicle.homeCity.name}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Model" />
 				</f:facet>
 				<h:outputText value="#{vehicle.model}" />
-			</h:column>
+			</p:column>
 			
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Max. Load" />
 				</f:facet>
 				<h:outputText value="#{vehicle.maxLoad}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
-				<h:commandButton value="Use" action="#{selectVehicleBean.Select}" >
+				<p:commandButton value="Use" action="#{selectVehicleBean.Select}" >
 					<f:param name="selectedIdStr" value="#{vehicle.id}" />
 					<f:param name="act" value="#{selectVehicleBean.act}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
 
 
-		</h:dataTable>
+		</p:dataTable>
 	</h:form>
-	<a href="index.xhtml">Index</a>
+	 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

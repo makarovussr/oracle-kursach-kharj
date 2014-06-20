@@ -10,6 +10,7 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form>
 		<h:outputText value="From: " />
 		<h:outputText value="#{selectRouteBean.cityFrom.name}" size="20"
@@ -24,16 +25,16 @@
 		dd.MM.yyyy HH:mm:ss
 		<br />
 		<h:outputText value="date from: " />
-		<h:inputText value="#{selectRouteBean.dateFrom}" size="20"
+		<p:inputText value="#{selectRouteBean.dateFrom}" size="20"
 			id="routeDateFrom">			
 			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
-			</h:inputText>
+			</p:inputText>
 		<br />
 		<h:outputText value="date to: " />
-		<h:inputText value="#{selectRouteBean.dateTo}" size="20"
+		<p:inputText value="#{selectRouteBean.dateTo}" size="20"
 			id="routeDateTo">			
 			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
-			</h:inputText>
+			</p:inputText>
 
 		<br />
 		<h:outputText value="Parcel:  " />
@@ -41,45 +42,45 @@
 		<a href="SelectParcel.xhtml">Select parcel</a>
 		<br />
 		
-		<h:commandButton value="Search">
+		<p:commandButton value="Search">
 			<f:ajax execute="routeFrom routeTo routeDateFrom routeDateFrom routeParcel"
 				render="routesTable" />
 					<f:param name="act" value="#{selectRouteBean.act}" />
-		</h:commandButton>
+		</p:commandButton>
 		
-		<h:dataTable value="#{selectRouteBean.routes}" var="route"
+		<p:dataTable value="#{selectRouteBean.routes}" var="route"
 			id="routesTable" border="1">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="id" />
 				</f:facet>
 				<h:outputText
 					value="#{route.id}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="vehicle" />
 				</f:facet>
 				<h:outputText
 					value="#{route.vehicle}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
-				<h:commandButton value="Use" action="#{selectRouteBean.Select}" >
+				<p:commandButton value="Use" action="#{selectRouteBean.Select}" >
 					<f:param name="selectedIdStr" value="#{route.id}" />
 					<f:param name="act" value="#{selectRouteBean.act}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
+			</p:column>
 
 
 
-		</h:dataTable>
+		</p:dataTable>
 	</h:form>
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

@@ -9,43 +9,24 @@
 	<title>Select parcel</title>
 </h:head>
 
-<h:body>
-  <ui:include src="Header.xhtml" />
+<h:body>  <ui:include src="Header.xhtml" />
+
+	<a href="Login.xhtml">Login</a> to use all options <br /><br />
 	<h:form>
 	<h:outputText value="Id:  " />
 		<p:inputText value="#{selectParcelBean.id}" size="20"
 			id="parcelId" />
 		<br />
-		<h:outputText value="Client:  " />
-		<h:outputText value="#{selectParcelBean.clientFrom.lastName} #{selectParcelBean.clientFrom.firstName}" size="20"
-			id="parcelClientFrom" />
-		<a href="SelectClient.xhtml?act=parcelFrom">Select client</a>
-		<br />
-		<h:outputText value="From: " />
-		<h:outputText value="#{selectParcelBean.cityFrom}" size="20"
-			id="parcelFrom" />
-		<a href="SelectCity.xhtml?act=parcelFrom">Select city from </a>
-		<br />
-		<h:outputText value="To: " />
-		<h:outputText value="#{selectParcelBean.cityTo}" size="20"
-			id="parcelTo" />
-		<a href="SelectCity.xhtml?act=parcelTo">Select city to</a>
-		<br />
-		<h:outputText value="Route: " />
-		<h:outputText value="#{selectParcelBean.route}" size="20"
-			id="parcelRoute" />
-		<a href="SelectRoute.xhtml?act=parcelSearchRoute">Select route</a>
-		<br />
 		
 		<p:commandButton value="Search">
-			<f:ajax execute="parcelClientFrom parcelFrom parcelTo parcelRoute parcelId"
+			<f:ajax execute="parcelId"
 				render="parcelsTable" />
 					<f:param name="act" value="#{selectParcelBean.act}" />
 		</p:commandButton>
 		
 		<p:commandButton value="Reset" action="#{selectParcelBean.Reset()}">
 			<f:ajax execute=""
-				render="parcelClientFrom parcelFrom parcelTo parcelRoute parcelsTable" />
+				render="parcelsTable" />
 					<f:param name="act" value="#{selectParcelBean.act}" />
 		</p:commandButton>
 		
@@ -136,10 +117,10 @@
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
-				<p:commandButton value="Use" action="#{selectParcelBean.Select}" >
+				<!--p:commandButton value="Use" action="#{selectParcelBean.Select}" >
 					<f:param name="selectedIdStr" value="#{parcel.id}" />
 					<f:param name="act" value="#{selectParcelBean.act}" />
-				</p:commandButton>
+				</p:commandButton-->
 				
 			</p:column>
 

@@ -10,48 +10,49 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form id="cityForm">
-		<h:dataTable value="#{selectParcelTypeBean.types}" var="t"
+		<p:dataTable value="#{selectParcelTypeBean.types}" var="t"
 			id="schedulesTable" border="1" styleClass="dataTable" rowClasses="rowOdd,rowEven">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="name" />
 				</f:facet>
-				<h:inputText value="#{t.name}" />
-			</h:column>
+				<p:inputText value="#{t.name}" />
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Max weight" />
 				</f:facet>
-				<h:inputText value="#{t.maxWeight}" />
-			</h:column>
+				<p:inputText value="#{t.maxWeight}" />
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Min weight" />
 				</f:facet>
-				<h:inputText value="#{t.minWeight}" />
-			</h:column>
+				<p:inputText value="#{t.minWeight}" />
+			</p:column>
 			
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="" />
 				</f:facet>
-				<h:commandButton value="Use" action="#{selectParcelTypeBean.Select}" >
+				<p:commandButton value="Use" action="#{selectParcelTypeBean.Select}" >
 					<f:param name="selectedIdStr" value="#{t.id}" />
 					<f:param name="act" value="#{selectParcelTypeBean.act}" />
-				</h:commandButton>
+				</p:commandButton>
 				
-			</h:column>
-		</h:dataTable>
+			</p:column>
+		</p:dataTable>
 
 	</h:form>
 	
 	
 	
 	
-	<a href="index.xhtml">Index</a>
+	 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

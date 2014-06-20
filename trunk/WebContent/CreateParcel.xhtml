@@ -10,6 +10,7 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form id="parcelForm">
 		<h:outputText value="Client from:  " />
 		<h:outputText value="#{(parcelBean.clientFrom!=null)}" size="20"
@@ -40,14 +41,14 @@
 		<br />
 		
 		<h:outputText value="Weight: " />
-		<h:inputText value="#{parcelBean.weight}" size="20"
+		<p:inputText value="#{parcelBean.weight}" size="20"
 			id="parcelWeight">
 			<f:convertNumber />
-			</h:inputText>
+			</p:inputText>
 		<br />
 		
 		<h:outputText value="Desription: " />
-		<h:inputText value="#{parcelBean.description}" size="100"
+		<p:inputText value="#{parcelBean.description}" size="100"
 			id="parcelDescription" />
 		<br />
 		
@@ -66,12 +67,12 @@
 			id="parcelType" />
 		<a href="SelectParcelType.xhtml?act=parcelChangeType">Select type</a>
 		<br />
-		<h:commandButton value="Save" action="#{parcelBean.Update()}">
+		<p:commandButton value="Save" action="#{parcelBean.Update()}">
 			<f:ajax execute="parcelClientFrom parcelClientTo parcelFrom parcelTo parcelRoute parcelWeight parcelDescription"
 				render="parcelForm" />
-		</h:commandButton>
+		</p:commandButton>
 	</h:form>
-	<a href="index.xhtml">Index</a>
+	 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>

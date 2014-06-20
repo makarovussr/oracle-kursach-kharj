@@ -10,6 +10,7 @@
 </h:head>
 
 <h:body>
+  <ui:include src="Header.xhtml" />
 	<h:form id="routeForm">
 		<h:outputText value="Vehicle:" />
 		<br />
@@ -22,46 +23,46 @@
 		<br />
 		dd.MM.yyyy HH:mm:ss
 		<br />
-		<h:dataTable value="#{routeBean.routeMaps}" var="routeMap"
+		<p:dataTable value="#{routeBean.routeMaps}" var="routeMap"
 			id="routeMapsTable" border="1">
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="City" />
 				</f:facet>
 				<h:outputText value="#{routeMap.city.name}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Time" />
 				</f:facet>
 				<h:outputText value="#{routeMap.stopDate}">
 			<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 				</h:outputText>
-			</h:column>
+			</p:column>
 
 			
-			<h:column>
+			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Remove" />
 				</f:facet>
-				<h:commandButton value="Remove" action="#{routeBean.DeleteRouteMapRow()}" ajax="true">
+				<p:commandButton value="Remove" action="#{routeBean.DeleteRouteMapRow()}" ajax="true">
 					<f:param name="mapRemoveIdStr" value="#{routeMap.id}" />
 					<f:ajax render="routeMapsTable" />
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
 		
-		<h:commandButton value="Save" action="#{routeBean.Update()}">
+		<p:commandButton value="Save" action="#{routeBean.Update()}">
 			<f:ajax execute="routeVehicle"
 				render="routeForm" />
-		</h:commandButton>
+		</p:commandButton>
 	</h:form>
 	
 	
 	
 	
-	<a href="index.xhtml">Index</a>
+		 <ui:include src="Footer.xhtml" />
 </h:body>
 
 </html>
