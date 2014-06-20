@@ -103,6 +103,49 @@ public class SelectParcelBean {
 			
 			return strId;
 		}
+		public String SelectSimple(){
+			//clean		
+			route = null;
+			cityFrom = null;
+			cityTo = null;
+			clientFrom = null;
+			clientTo = null;
+			parcelType = null;
+			weight = 0.0f;
+			price = 0.0f;
+			description = "";
+			acceptDate = null;
+			navigateTo = "SimpleParcel.xhtml";
+			selectedId = null;
+			parcels = new ArrayList<Parcel>();
+			currentPosition = null;
+			act = "";
+			
+			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		  String strId = params.get("selectedIdStr");
+
+			Integer id = null;
+			try {
+				id = Integer.parseInt(strId);
+			} catch (Exception e) {}
+			selectedId = id;
+			
+				String req = "";
+				if(navigateTo.contains("?")){
+					req = "&selectedParcelId="+selectedId;
+				}else{
+					req = "?selectedParcelId="+selectedId;
+				}
+			try{
+				
+				FacesContext.getCurrentInstance().getExternalContext().redirect(navigateTo+req);
+			} catch (IOException e) {
+				System.out.print("Cant redirect to "+navigateTo);
+				e.printStackTrace();
+			} 
+			
+			return strId;
+		}
 		
 		public City getCityFrom() {
 			Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
