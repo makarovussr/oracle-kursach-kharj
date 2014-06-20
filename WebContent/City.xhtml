@@ -11,6 +11,8 @@
 
 <h:body>
   <ui:include src="Header.xhtml" />
+  
+	<a href="Login.xhtml">Login</a> to use all options <br />
 	<h:form id="cityForm">
 		<h:outputText value="Name:" />
 		<p:inputText value="#{cityBean.name}" size="20"
@@ -56,14 +58,14 @@
 				<f:facet name="header">
 					<h:outputText value="Remove" />
 				</f:facet>
-				<p:commandButton value="Remove" action="#{cityBean.DeleteScheduleRow}" ajax="true">
+				<p:commandButton value="Remove" action="#{cityBean.DeleteScheduleRow}" ajax="true"  disabled="#{!(userBean.isAdmin)}" >
 					<f:param name="schRemoveIdStr" value="#{schedule.id}" />
 					<f:ajax render="schedulesTable" />
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
 		
-		<p:commandButton value="Save" action="#{cityBean.Update()}">
+		<p:commandButton value="Save" action="#{cityBean.Update()}"  disabled="#{!(userBean.isAdmin)}" >
 			<f:ajax execute="cityName cityAddress cityPhone schedulesTable"
 				render="cityForm" />
 		</p:commandButton>

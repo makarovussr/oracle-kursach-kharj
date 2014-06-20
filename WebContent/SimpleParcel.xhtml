@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>View Parcel</title>
+</h:head>
+
+<h:body>
+  <ui:include src="Header.xhtml" />
+	<a href="Login.xhtml">Login</a> to use all options <br /><br />
+	<h:form id="parcelForm">
+		<h:outputText value="Client from:  " />
+		<h:outputText value="#{parcelBean.clientFrom.lastName} #{parcelBean.clientFrom.firstName}" size="20"
+			id="parcelClientFrom" />
+		<br />
+		
+		<h:outputText value="Client To:  " />
+		<h:outputText value="#{parcelBean.clientTo.lastName} #{parcelBean.clientTo.firstName}" size="20"
+			id="parcelClientTo" />
+		<br />
+		
+		<h:outputText value="From: " />
+		<h:outputText value="#{parcelBean.cityFrom.name}" size="20"
+			id="parcelFrom" />
+		<br />
+		<h:outputText value="To: " />
+		<h:outputText value="#{parcelBean.cityTo.name}" size="20"
+			id="parcelTo" />
+		<br />
+		<h:outputText value="Type: " />
+		<h:outputText value="#{parcelBean.parcelType}" size="20"
+			id="parcelType" />
+		<br />
+		<h:outputText value="Weight: " />
+		<p:inputText value="#{parcelBean.weight}" size="20"
+			id="parcelWeight" disabled="true">
+			<f:convertNumber />
+			</p:inputText>
+		<br />
+		
+		<h:outputText value="Desription: " />
+		<p:inputText value="#{parcelBean.description}" size="100"
+			id="parcelDescription"  disabled="true"/>
+		<br />
+		
+		<h:outputText value="Accept date " />
+		<h:outputText value="#{parcelBean.acceptDate}" size="20"
+			id="parcelAcceptDate" />
+		<br />
+		
+		<h:outputText value="Price: " />
+		<h:outputText value="#{parcelBean.price}" size="20"
+			id="parcelPrice" />
+			
+		<br />
+
+		<h:outputText value="Current location: " />
+		<h:outputText value="#{parcelBean.currentPosition}" size="20" />
+		<br />
+		
+	</h:form>
+		 <ui:include src="Footer.xhtml" />
+</h:body>
+
+</html>
