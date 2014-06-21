@@ -64,7 +64,8 @@
 		<h:outputText value="Route: " />
 		<h:outputText value="#{parcelBean.route}" size="20"
 			id="parcelRoute" />
-		<a href="SelectRoute.xhtml?act=parcelChangeRoute&amp;selectedParcelId=#{parcelBean.id}">Select route</a>
+			<p:commandButton value="Select route" action="#{parcelBean.RedirectSelectRoute()}" disabled="#{!(userBean.isAdmin)}"></p:commandButton>
+		<!--a href="SelectRoute.xhtml?act=parcelChangeRoute&amp;selectedParcelId=#{parcelBean.id}">Select route</a-->
 		<br />
 		<h:outputText value="Current location: " />
 		<h:outputText value="#{parcelBean.currentPosition}" size="20" />

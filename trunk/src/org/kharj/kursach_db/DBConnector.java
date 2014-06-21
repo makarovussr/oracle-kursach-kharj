@@ -73,7 +73,7 @@ public class DBConnector {
 			ArrayList<Client> clients = new ArrayList<Client>();
 			clients.add(new Client( "Evgen", "Kharchenko", null, cities.get(1), "Kharkiv addr", "+380939415776", "1995kenny@gmail.com"));
 			clients.add(new Client( "Igor", "Zhylin", null, cities.get(1), "Kharkiv addr 2", "1234", "igormail"));
-			clients.add(new Client( "Ivan", "Dulin", null, cities.get(0), "Kyiv addr", "123456", "ivanmail"));
+			clients.add(new Client( "Ivan", "Ivanov", null, cities.get(0), "Kyiv addr", "123456", "ivanmail"));
 			for(Client c : clients) session.save(c);
 			//Vehicle
 			ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -360,6 +360,7 @@ public class DBConnector {
 	}
 	public List<Route> GetRoutesForParcel(Parcel p){
 		List<Route> routes = GetRoutesFromCityToCity(p.cityFrom, p.cityTo);
+		System.out.print(p);
 		return routes;/*
 		List<Route> okRoutes = new ArrayList<Route>();
 		for(Route route : routes){
