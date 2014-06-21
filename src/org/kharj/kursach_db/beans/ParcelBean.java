@@ -195,6 +195,7 @@ public class ParcelBean {
 				DBConnector connector = new DBConnector();
 				route = connector.GetRouteById(cityId);
 				connector.Close();
+				Update();
 			}
 			return route;
 		}
@@ -368,7 +369,16 @@ public class ParcelBean {
 			return currentPosition;
 		}
 
-
+		public String RedirectSelectRoute(){
+			String nav = "SelectRoute.xhtml?act=parcelChangeRoute&selectedParcelId="+id;
+			try{				
+			FacesContext.getCurrentInstance().getExternalContext().redirect(nav);
+		} catch (IOException e) {
+			System.out.print("Cant redirect to ");
+			e.printStackTrace();
+		} 
+			return "";
+		}
 
 
 
