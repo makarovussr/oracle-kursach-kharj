@@ -31,6 +31,7 @@ public class ParcelBean {
 		private Parcel parcel = null;
 		private RouteMap currentPosition = null;
 		private String act = "";
+		private String parcelTypeName = "";
 		
 		
 		
@@ -378,6 +379,20 @@ public class ParcelBean {
 			e.printStackTrace();
 		} 
 			return "";
+		}
+
+
+
+		public String getParcelTypeName() {
+			if(parcelType == null){
+				return "";
+			}
+			return parcelType.name + "("+parcelType.minWeight.toString()+" - "+parcelType.maxWeight.toString()+")";
+		}
+
+
+
+		public void setParcelTypeName(String parcelTypeName) {
 		}
 
 

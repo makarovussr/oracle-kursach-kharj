@@ -40,8 +40,8 @@ public class SelectCityBean {
 		
 		//targets
 		navigateTo = "City.xhtml";
-		String act = params.get("act");
-		System.out.print("act==="+act);
+		String act = getAct();
+		System.out.print("act=="+act);
 		if(act != null && act.equals("routeTo")){
 			navigateTo = "SelectRoute.xhtml?cityParam=to";
 		}else if(act != null && act.equals("routeFrom")){
@@ -129,7 +129,11 @@ public class SelectCityBean {
 	}
 
 	public String getAct() {
-		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
+		String a = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
+		if(a != null){
+			act = a;
+		}
+		return act;
 	}
 
 

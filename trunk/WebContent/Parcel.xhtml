@@ -15,29 +15,29 @@
 		<h:outputText value="Client from:  " />
 		<h:outputText value="#{parcelBean.clientFrom.lastName} #{parcelBean.clientFrom.firstName}" size="20"
 			id="parcelClientFrom" />
-		<a href="SelectClient.xhtml?act=parcelChangeFrom">Select client from</a>
+		<a href="SelectClient.xhtml?act=parcelChangeFrom">[SELECT]</a>
 		<br />
 		
 		<h:outputText value="Client To:  " />
 		<h:outputText value="#{parcelBean.clientTo.lastName} #{parcelBean.clientTo.firstName}" size="20"
 			id="parcelClientTo" />
-		<a href="SelectClient.xhtml?act=parcelChangeTo">Select client to </a>
+		<a href="SelectClient.xhtml?act=parcelChangeTo">[SELECT]</a>
 		<br />
 		
-		<h:outputText value="From: " />
+		<h:outputText value="City from: " />
 		<h:outputText value="#{parcelBean.cityFrom.name}" size="20"
 			id="parcelFrom" />
-		<a href="SelectCity.xhtml?act=parcelChangeFrom">Select city from </a>
+		<a href="SelectCity.xhtml?act=parcelChangeFrom">[SELECT]</a>
 		<br />
-		<h:outputText value="To: " />
+		<h:outputText value="City to: " />
 		<h:outputText value="#{parcelBean.cityTo.name}" size="20"
 			id="parcelTo" />
-		<a href="SelectCity.xhtml?act=parcelChangeTo">Select city to</a>
+		<a href="SelectCity.xhtml?act=parcelChangeTo">[SELECT]</a>
 		<br />
 		<h:outputText value="Type: " />
-		<h:outputText value="#{parcelBean.parcelType}" size="20"
+		<h:outputText value="#{parcelBean.parcelTypeName}" size="20"
 			id="parcelType" />
-		<a href="SelectParcelType.xhtml?act=parcelChangeType">Select type</a>
+		<a href="SelectParcelType.xhtml?act=parcelChangeType">[SELECT]</a>
 		<br />
 		<h:outputText value="Weight: " />
 		<p:inputText value="#{parcelBean.weight}" size="20"

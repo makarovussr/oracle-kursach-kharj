@@ -122,7 +122,7 @@ public class UserBean {
 		return "";
 	}
 	public String goSelectClient(){
-		Redirect("SelectClient.xhtml");
+		Redirect("SelectClient.xhtml?act=");
 		return "";
 	}
 	public String goSelectParcel(){
@@ -130,7 +130,7 @@ public class UserBean {
 		return "";
 	}
 	public String goSelectCity(){
-		Redirect("SelectCity.xhtml");
+		Redirect("SelectCity.xhtml?act=");
 		return "";
 	}
 	public String goSelectRoute(){

@@ -34,7 +34,7 @@ public class SelectClientBean {
 		  String strId = params.get("selectedIdStr");
 		  
 		//targets
-			String act = params.get("act");
+			String act = getAct();
 			System.out.print("act==="+act);
 			navigateTo = "Client.xhtml";
 			if(act != null && act.equals("parcelTo")){
@@ -135,7 +135,11 @@ public class SelectClientBean {
 			this.selectedId = selectedId;
 		}
 		public String getAct() {
-			return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
+			String a = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("act");
+			if(a != null){
+				act = a;
+			}
+			return act;
 		}
 }
 
